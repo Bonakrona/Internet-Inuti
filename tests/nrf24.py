@@ -15,7 +15,9 @@ try:  # on Linux
 
     SPI_BUS = spidev.SpiDev()  # for a faster interface on linux
     CSN_PIN = 0  # use CE0 on default bus (even faster than using any pin)
-    CE_PIN = DigitalInOut(board.D22)  # using pin gpio22 (BCM numbering)
+    #CE_PIN = DigitalInOut(board.D22)  # using pin gpio22 (BCM numbering)
+    CE_PIN = DigitalInOut(board.D17)
+    CSN_PIN = DigitalInOut(board.D8)
 
 except ImportError:  # on CircuitPython only
     # using board.SPI() automatically selects the MCU's
@@ -23,8 +25,8 @@ except ImportError:  # on CircuitPython only
     SPI_BUS = board.SPI()  # init spi bus object
 
     # change these (digital output) pins accordingly
-    CE_PIN = DigitalInOut(board.D4)
-    CSN_PIN = DigitalInOut(board.D5)
+    CE_PIN = DigitalInOut(board.D17)
+    CSN_PIN = DigitalInOut(board.D8)
 
 
 # initialize the nRF24L01 on the spi bus object
@@ -115,3 +117,4 @@ def slave(timeout=6):
     nrf.listen = False  # put the nRF24L01 is in TX mode
 
 
+slave()
